@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Atomic Model</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #000;
+        }
+        #atom {
+            position: relative;
+            width: 400px;
+            height: 400px;
+            margin: 20vh auto;
+            border-radius: 50%;
+            background: radial-gradient(circle, #fff 10%, transparent 40%);
+        }
+        .electron {
+            position: absolute;
+            border-radius: 50%;
+            background: #00f;
+        }
+    </style>
+</head>
+<body>
+    <div id="atom">
+        <div class="electron" id="electron1"></div>
+        <div class="electron" id="electron2"></div>
+        <div class="electron" id="electron3"></div>
+    </div>
+    <script>
+        const electrons = [
+            { name: "electron1", distance: 100, speed: 0.03 },
+            { name: "electron2", distance: 140, speed: 0.02 },
+            { name: "electron3", distance: 180, speed: 0.01 },
+        ];
+
+        const atom = document.getElementById("atom");
+
+        electrons.forEach((electron) => {
+            const newElectron = document.getElementById(electron.name);
+
+            let angle = Math.random() * 360; // Random initial angle.
+
+            setInterval(() => {
+                angle += electron.speed;
+                const x = electron.distance * Math.cos(angle) + atom.offsetWidth / 2;
+                const y = electron.distance * Math.sin(angle) + atom.offsetHeight / 2;
+
+                newElectron.style.width = "10px";
+                newElectron.style.height = "10px";
+                newElectron.style.left = x + "px";
+                newElectron.style.top = y + "px";
+            }, 10);
+        });
+    </script>
+</body>
+</html>
